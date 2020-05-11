@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash">
+                {% for message in messages %}
+                    <div class="alert alert-success center-block" style="text-align: center">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <strong>{{ message }}</strong></div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <img src="static/icon.jpg" alt="logo" class="center-block">
+    <h1 class="text-center">欢迎使用 <small>琳小姐的代售铺子</small></h1>
+    <div class="container center-block">
+        <form class="form-horizontal" action="/user_login" method="post">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="账号/Email" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="不给你看我的密码" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="VerifyCode" class="col-sm-2 control-label">验证码</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="VerifyCode" placeholder="点击换图" name="verify_text">
+                </div>
+                <div class="col-sm-2">
+                    <img id="captcha_img" class="img-rounded" src="{{ url_for('index.graph_captcha') }}"
+                         onclick="this.src='/captcha?'+ Math.random()" alt="验证码"/>
+                </div>
+                <div id="result"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button type="submit" class="btn btn-default" name="submit">登陆</button>
+                    <button type="button" class="btn btn-success" onclick="window.location.href='/register'">注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{#        <div class="form-group">#}
+{#            <div class="col-sm-offset-2 col-sm-10">#}
+{#                <div class="checkbox">#}
+{#                    <label>#}
+{#                        <input type="checkbox"> Remember me#}
+{#                    </label>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+{% endblock %}
+
+{% block scripts %}
+{#    <script type="text/javascript">#}
+{#        function createAJAX(){#}
+{#            let httpRequest;#}
+{#            if(window.XMLHttpRequest) {#}
+{#                //在IE6以上的版本以及其他内核的浏览器(Mozilla)等#}
+{#                httpRequest = new XMLHttpRequest();#}
+{#            }else if(window.ActiveXObject) {#}
+{#                //在IE6以下的版本#}
+{#                httpRequest = new ActiveXObject();#}
+{#            }#}
+{#            return httpRequest#}
+{#        }#}
+{#        document.getElementById("VerifyCode").onkeyup = function () {#}
+{#            let keyValue = this.value;#}
+{#            if (keyValue.length == 4) {#}
+{#                let ajax = createAJAX();#}
+{#                let method = "post";#}
+{#                let url = "http://localhost:5000/CheckCodeServlet";#}
+{#                ajax.open(method, url);#}
+{#                ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded");#}
+{#                ajax.send("keyValue=" + keyValue);#}
+{##}
+{#                /*******************ajax回调函数*******************************/#}
+{#                ajax.onreadystatechange = function () {#}
+{#                    if (ajax.readyState == 4) {#}
+{#                        if (ajax.status == 200) {#}
+{#                            //得到服务器带过来的数据#}
+{#                            let tip = ajax.responseText;#}
+{#                            /*******************使用DOM把数据添加到页面上*******************************/#}
+{#                            let img = document.createElement("img");#}
+{#                            img.src = tip;#}
+{#                            img.style.width = "14px";#}
+{#                            img.style.height = "14px";#}
+{#                            let td = document.getElementById("result");#}
+{#                            td.innerHTML = "";#}
+{#                            td.appendChild(img);#}
+{#                        }#}
+{#                    }#}
+{#                }#}
+{#            } else {#}
+{#                //清空图片#}
+{#                let td = document.getElementById("result");#}
+{#                td.innerHTML = "";#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script>
+        {% if is_wrong_verify_code %}
+            alert('验证码错误！');
+        {% endif %}
+    </script>
+</head>
+<body>
+    <div>
+        <form action="/do_register_user" method="post">
+            <table border="1">
+                <tr>
+                    <th>账号</th>
+                    <td><label>
+                        <input type="text" name="account">
+                    </label></td>
+                </tr>
+                <tr>
+                    <th>密码</th>
+                    <td><label>
+                        <input type="password" name="password">
+                    </label></td>
+                </tr>
+                <tr>
+                    <th>邮箱</th>
+                    <td><label>
+                        <input type="text" name="email">
+                    </label></td>
+                </tr>
+                <tr>
+                    <th>验证码(点击刷新)</th>
+                    <td><label>
+                        <input type="text" name="verify_text">
+                    </label></td>
+                    <td>
+                        <img id="captcha_img" class="captcha-img" src="{{ url_for('index.graph_captcha') }}"
+                             onclick="this.src='/captcha?'+ Math.random()" alt="验证码"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>提交</th>
+                    <td>
+                        <input name="submit" type="submit" value="点我注册">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

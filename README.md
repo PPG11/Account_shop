@@ -1,2 +1,2 @@
 # Account_shop
-a repository for account of jianwang3 
+这是一个待售铺子的仓库

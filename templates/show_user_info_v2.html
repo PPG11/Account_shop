@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash">
+                {% for message in messages %}
+                    <div class="alert alert-success center-block" style="text-align: center">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <strong>{{ message }}</strong></div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <img src="../static/main.jpg" alt="logo" class="center-block">
+    <h1 class="text-center">{{ username }}的账号信息</h1>
+    <h2 class="text-center"><small>琳小姐的代售铺子</small></h2>
+
+    <div class="container center-block">
+        <form class="form-horizontal" action="/user_info/add_new/{{ username }}" method="post">
+            <div class="form-group">
+                <label for="add_new_info" class="control-label">录入新账号信息</label>
+                    <textarea name="content" id="add_new_info" rows="5" class="form-control" placeholder="如：TW7423【华乾道长1W4】一代金狐金猴金猴红4红发8金发白娃娃黑年轮25限青盒秃盒貂盒丝路踏云白端午二代七夕四代七夕8盒子二代红情R枕9披风夜话6W4资历挂宠杰"></textarea>
+            </div>
+            <div class="form-group">
+                    <button type="submit" class="btn btn-success" name="submit">录入信息</button>
+            </div>
+        </form>
+    </div>
+    <div class="container center-block">
+        <table class="table table-striped">
+                    <tr>
+                        <th>编号</th>
+                        <th>信息</th>
+                        <th> </th>
+                    </tr>
+            {% for item in datas %}
+                <tr>
+                    <th>{{ item.tag }}</th>
+                    <th>{{ item.info }}</th>
+                    <th><button type="button" class="btn btn-danger"  onclick="delete_info('{{ username }}', '{{ item.tag }}')"  OnClientClick="return confirm('您确定要删除?');">删除</button></th>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function delete_info(username, tag) {
+            if (confirm('确认删除？')==true){
+                $.ajax({
+                    type: 'post',
+                    url:"delete_info",
+                    dataType: 'Json',
+                    data:{
+                        "username": username,
+                        "tag": tag,
+                    },
+                    success: function() {
+                        window.location.reload();
+                    },
+                    error: function () {
+                        alert('有问题');
+                    }
+                });
+            }
+        }
+    </script>
+{% endblock %}

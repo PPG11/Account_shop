@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ username }}的账号信息</title>
+</head>
+<body>
+    <h1>{{ username }}的账号信息</h1>
+    <form action="/add_new/{{ username }}" method="post">
+        <label for="textarea">添加账号信息</label><br>
+        <textarea name="content" id="textarea" cols="100" rows="10" placeholder="如：TW7423【华乾道长1W4】一代金狐金猴金猴红4红发8金发白娃娃黑年轮25限青盒秃盒貂盒丝路踏云白端午二代七夕四代七夕8盒子二代红情R枕9披风夜话6W4资历挂宠杰"></textarea><br>
+        <input type="submit" name="submit" value="提交">
+    </form>
+    <table border="1">
+        <tr>
+            <th>编号</th>
+            <th>信息</th>
+        </tr>
+        {% for item in datas %}
+            <tr>
+                <th>{{ item.tag }}</th>
+                <th>{{ item.info }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

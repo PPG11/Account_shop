@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% if is_wrong_verify_code %}
+        <script src="../static/alert_verify_code.js"></script>
+{#        alert('验证码错误！');#}
+    {% endif %}
+</head>
+<body>
+    <div>
+        <h1>登陆欢迎界面</h1>
+        <form action="/user_login" method="post">
+            <table border="1">
+                <tr>
+                    <th>用户名</th>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <th>密码</th>
+                    <td><label>
+                        <input type="password" name="password">
+                    </label></td>
+                </tr>
+                <tr>
+                    <th>提交</th>
+                    <td><input type="submit" name="submit" value="登陆"></td>
+                </tr>
+                <tr>
+                    <th>验证码(点击刷新)</th>
+                    <td><label>
+                        <input type="text" name="verify_text">
+                    </label></td>
+                    <td>
+                        <img id="captcha_img" class="captcha-img" src="{{ url_for('index.graph_captcha') }}"
+                             onclick="this.src='/captcha?'+ Math.random()" alt="验证码"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <a href="/register">
+            <button type="button">注册</button>
+        </a>
+    </div>
+</body>
+</html>

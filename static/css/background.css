@@ -1,0 +1,12 @@
+.diybg {
+    /*background:url('../connect.jpg') no-repeat center;*/
+    background-size: cover;
+    background-image: url('../connect.jpg');
+    background-attachment: fixed;
+    /*background-color: red;*/
+    /*height: 100px;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*width: 100px;*/
+}
